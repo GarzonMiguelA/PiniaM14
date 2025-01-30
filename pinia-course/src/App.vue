@@ -13,10 +13,11 @@ productStore.fill();
 
 const addToCart = (count, product) => {
   count = parseInt(count)
-  for (let i = 0; i < count; i++) {
-    cartStore.items.push({ product });
-  }
-
+  cartStore.$patch(state =>{
+    for (let i = 0; i < count; i++) {
+      state.items.push(product);
+    }
+  })
 };
 
 </script>
@@ -29,7 +30,7 @@ const addToCart = (count, product) => {
         v-for="product in productStore.products"
         :key="product.name"
         :product="product"
-        @addToCart="adToCart($event, product)"
+        @addToCart="addToCart($event, product)"
         />
     </ul>
   </div>
