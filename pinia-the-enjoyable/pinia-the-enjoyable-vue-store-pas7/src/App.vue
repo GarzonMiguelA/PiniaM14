@@ -29,7 +29,7 @@ productStore.fill();
         @addToCart="cartStore.addItems($event, product)"
       /-->
       <ProductCard v-for="product in productStore.products" :key="product.name" :product="product"
-        @addToCart="addToCart($event, product)" />
+        @addToCart="cartStore.addItems($event, product)" />
     </ul>
   </div>
 </template>

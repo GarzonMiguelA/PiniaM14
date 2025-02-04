@@ -12,8 +12,8 @@ export const useProductStore = defineStore("ProductStore", {
   
     //actions
     actions: {
-        async fill() {
-            this.products = (await import("@/data/products.json")).default;
+        fill() {
+            this.products = products;
         }
     },
   

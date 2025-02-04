@@ -4,22 +4,23 @@ import ProductCard from "@/components/ProductCard.vue";
 import { useProductStore } from "./store/useProductStore";
 import { storeToRefs } from "pinia";
 import { useCartStore } from "./store/CartStore";
- 
-useProductStore();
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
+
+// Llenar la tienda con los productos
 productStore.fill();
 
+const { products } = storeToRefs(productStore);
+
 const addToCart = (count, product) => {
-  count = parseInt(count)
-  cartStore.$patch(state =>{
+  count = parseInt(count);
+  cartStore.$patch(state => {
     for (let i = 0; i < count; i++) {
       state.items.push(product);
     }
-  })
+  });
 };
-
 </script>
 
 <template>
@@ -31,7 +32,7 @@ const addToCart = (count, product) => {
         :key="product.name"
         :product="product"
         @addToCart="addToCart($event, product)"
-        />
+      />
     </ul>
   </div>
 </template>
