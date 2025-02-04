@@ -23,6 +23,16 @@ export const useCartStore = defineStore("CartStore", {
       this.items = this.items.filter(item => item.name !== name);
     },
 
+    /* Implementamos la función para actualizar el número de productos */
+    setItemCount(item, count) {
+      // Eliminamos todos los ítems con el mismo nombre
+      this.items = this.items.filter(i => i.name !== item.name);
+      // Añadimos el ítem con la nueva cantidad
+      for (let index = 0; index < count; index++) {
+        this.items.push({ ...item });
+      }
+    },
+
   },
 
   //getters:
