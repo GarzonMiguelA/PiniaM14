@@ -1,11 +1,12 @@
 <script setup>
-defineProps({
+const props = defineProps({
   modelValue: { type: [Number, String], default: 0 },
 });
 
 const emit = defineEmits(["update:modelValue", "input"]);
 const updateValue = (value) => emit("update:modelValue", value);
 </script>
+
 <template>
   <span>
     <button
