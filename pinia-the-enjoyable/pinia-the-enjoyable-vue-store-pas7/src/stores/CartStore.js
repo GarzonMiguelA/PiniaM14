@@ -1,16 +1,20 @@
 import { groupBy } from "lodash";
 import { defineStore, acceptHMRUpdate } from "pinia";
+import {useLocalStorage} from "@vueuse/core"
 
 export const useCartStore = defineStore("CartStore", {
+  historyEnabled: true,
   state: () => {
     return {
       items: [],
+      items: useLocalStorage("CartStore:items",[]),
+
+      historyEnabled: true, // Afegim la propietat historyEnabled
     };
   },
   actions: {
-
     clearItem(name) {
-      this.items = this.items.filter(item => item.name !== name);
+      this.items = this.items.filter(item => item.name !== name);A
     },
 
     setItemCount(item, count) {
@@ -25,7 +29,12 @@ export const useCartStore = defineStore("CartStore", {
       alert(`${authUserStore.username} just bought ${this.count} items at a total of $${this.total}`);
     },
 
-    
+    addItems(count, product) {
+      count = parseInt(count);
+      for (let index = 0; index < count; index++) {
+        this.items.push(product);
+      }
+    },
   },
 
   getters: {
